@@ -1,0 +1,192 @@
+/* Hide Radio button */
+.rate > input {
+    display: none;
+}
+
+.rate {
+    display: inline-block;
+    border: 0;
+}
+
+.rate > label {
+    float: right;
+}
+
+/* Showing the stars */
+.rate > label:before{
+    display: inline-block;
+    font-size: 1.1rem;
+    font-family: FontAwesome;
+    content: "\f005";
+    margin:0;
+    padding:0.3rem .2rem;
+    cursor: pointer;
+  }
+
+/* Half star */
+.rate .half:before{
+    content: "\f089";
+    position: absolute;
+    padding-right: 0;
+  }
+
+/* Click and hove */
+input:checked ~ label, label:hover ~ label {
+    color: #ffb503;
+}
+
+/* hover highlight */
+input:checked + label:hover, input:checked ~ label:hover, input:checked ~ label:hover ~ label,
+label:hover ~ input:checked ~ label {
+    color: #cc9000;
+}
+
+.rating-star i {
+    color: #ffb503 !important;
+}
+
+.info-box {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+.info-box h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+.info-box p {
+    line-height: 1.6;
+    color: #555;
+}
+.info-box ul {
+    list-style: disc;
+    padding-left: 40px;
+}
+.info-box ul li {
+    margin-bottom: 10px;
+}
+
+ul.thumb {
+    margin: 0 auto;
+    padding: 0;
+    float: left;
+}
+
+ul.thumb li {
+    list-style: none;
+    margin: 10px;
+}
+
+ul.thumb li img {
+    width: 80px;
+    height: 80px;
+    border: 1px solid grey;
+}
+
+/* .terms-checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    color: #cc9000;
+}
+
+.terms-label {
+    font-size: 14px;
+    color: #333;
+    vertical-align: middle;
+} */
+
+
+.terms-checkbox {
+    margin-right: 10px;
+}
+
+.terms-label {
+    font-size: 14px;
+    color: #333; /* Define uma cor padrão */
+    vertical-align: middle;
+    margin: 0; /* Remove qualquer margem padrão */
+}
+
+.terms-label a {
+    color: #007bff; /* Azul padrão para links */
+    text-decoration: none;
+}
+
+.terms-label a:hover {
+    text-decoration: underline;
+}
+
+/* Garantir que a cor do texto não mude quando a checkbox está marcada */
+input[type="checkbox"]:checked + .terms-label {
+    color: #333;
+}
+
+.logo-da-day {
+    height: 60px;
+    width: 72px;
+}
+
+.header-main.border-bottom {
+    height: 90px;
+    padding: 0 15px; /* padding somente nas laterais */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* para distribuir espaço entre os itens */
+}
+
+.widget-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.title.text-muted {
+    display: flex;
+    align-items: center;
+}
+
+.tcm-icon-container {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.tcm-icon {
+    width: 23px; /* ajuste conforme necessário */
+    height: 30;
+    max-height: 30px; /* ajuste conforme necessário para manter a altura da navbar */
+    margin-left: 5px; /* espaço entre o texto e o ícone */
+    vertical-align: middle;
+    padding-bottom: 5px; /* garantir que não haja padding */
+    margin: 0; /* garantir que não haja margin */
+}
+
+.widget-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px; /* espaço entre os links */
+}
+
+.widget-links a {
+    margin: 0 2px; /* margem para espaçamento entre os links */
+}
+
+.nav-options .widget-header {
+    margin-right: 20px; /* espaço extra entre os elementos e o carrinho de compras */
+}
+
+.nav-options .widget-header:last-child {
+    margin-right: 0;
+}
+
+.section-intro {
+    padding-top: 40px;
+}

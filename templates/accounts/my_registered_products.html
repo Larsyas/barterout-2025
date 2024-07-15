@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<section class="section-conten padding-y bg">
+
+{% include 'includes/alerts.html' %}
+<div class="container">
+	<div class="row">
+	{% include 'includes/dashboard_sidebar.html' %}
+	<main class="col-md-9">
+		<article class="card">
+		<header class="card-header">
+			<strong class="d-inline-block mr-3">Your products history</strong>
+
+		</header>
+		<div class="card-body">
+			<div class="row">
+			<div class="col-md-12">
+				<table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th scope="col">Product Name</th>
+				      <th scope="col">Status</th>
+				      <th scope="col">TCM Payment Received</th>
+					  <th scope="col">Date of Registration</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+					{% for user_product in user_products %}
+				        <tr>
+				            <th scope="row">{{ user_product.product_name }}</th>
+							{% if user_product.approved is True %}
+				            	<td>Approved</td>
+							{% elif user_product.approved is not True and user_product.rejected is not True %}
+				            	<td>Under Review</td>
+							{% else %}
+								<td>Rejected</td>
+							{% endif %}
+
+							{% if user_product.tcm_payment is not None %}
+				            	<td>{{ user_product.tcm_payment }} TCM</td>
+							{% else %}
+				            	<td>-</td>
+
+							{% endif %}
+				            <td>{{ user_product.created_date }}</td>
+				        </tr>
+				    {% endfor %}
+
+				  </tbody>
+				</table>
+			</div>
+
+			</div> <!-- row.// -->
+		</div> <!-- card-body .// -->
+
+		</article> <!-- order-group.// -->
+	</main>
+</div> <!-- row.// -->
+</div>
+
+
+</section>
+
+{% endblock %}

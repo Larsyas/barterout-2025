@@ -1,0 +1,97 @@
+{% load static %}
+
+<header class="section-header">
+    <nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTop4">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">English</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">USD</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li><a href="#" class="nav-link"><i class="fa fa-envelope"></i> Email</a></li>
+                    <li><a href="#" class="nav-link"><i class="fa fa-phone"></i> Call us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="header-main border-bottom">
+        <div class="container">
+            <div class="row align-items-center navbar-padding-right">
+                <div class="col-md-1">
+                    <a href="/" class="brand-wrap"><img class="logo-da-day" src="{% static './images/BARTER_OUT_logo.png' %}"></a>
+                </div>
+                <div class="col-lg col-sm col-md col-6 flex-grow-0">
+                    <div class="category-wrap dropdown d-inline-block float-right">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bars"></i> All category
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'store' %}">All Products</a>
+                            {% for category in links %}
+                                <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'store' %}" class="btn btn-outline-primary">Store</a>
+                <div class="col-lg col-md-6 col-sm-6">
+                    <form action="{% url 'search' %}" class="search" method="GET">
+                        <div class="input-group w-100">
+                            <input type="text" class="form-control" style="width:60%;" placeholder="Search" name="keyword">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3 nav-options">
+                    <div class="d-flex justify-content-end mb-3 mb-lg-0 nav-options">
+                        {% if user.id is None %}
+                            <div class="widget-header">
+                                <small class="title text-muted">Welcome guest!</small>
+                                <div>
+                                    <a href="{% url 'login' %}">Sign in</a> <span class="dark-transp"> | </span>
+                                    <a href="{% url 'register' %}">Register</a>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="widget-header">
+                                <small class="title text-muted">
+                                    Welcome    <b>  {{ user.first_name }}!  |</b> 
+                                    <b>  {{ TCM_wallet }} TCM</b>
+                                    <span class="tcm-icon-container">
+                                        <img class="tcm-icon" src="{% static 'images/BARTER_OUT.png' %}" alt="TCM Icon">
+                                    </span>
+                                </small>
+                                <div class="widget-links">
+                                    <a href="{% url 'register_product' %}">Register Product</a>
+                                    <span class="dark-transp"> | </span>
+                                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                                    <span class="dark-transp"> | </span>
+                                    <a href="{% url 'logout' %}">Logout</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <a href="{% url 'cart' %}" class="widget-header pl-3 ml-4">
+                            <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
+                            {% if cart_count > 0 %}
+                                <span class="badge badge-pill badge-danger notify" style="margin-top: 20px">{{ cart_count }}</span>
+                            {% endif %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>

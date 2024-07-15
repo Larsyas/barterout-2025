@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section-content padding-y">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="info-box">
+          <h2>Welcome to Our Platform!</h2>
+          <p>Our platform allows you to not only purchase products using our unique virtual currency, TCM, but also to earn TCM by registering your own products. Here’s how it works:</p>
+          <ul>
+              <li><strong>Register and Log In</strong>: Create an account on our platform and log in to access additional features.</li>
+              <li><strong>Register Your Products</strong>: Once logged in, you can register products by providing details such as the product name, category, description, and images. Submit your product for review.</li>
+              <li><strong>Product Review</strong>: Our team of administrators will review the products you register. They will approve or reject your products based on our quality standards.</li>
+              <li><strong>Earn TCM</strong>: If your product is approved, you will receive a certain amount of TCM as a reward. The amount of TCM you receive is determined by the admin during the approval process.</li>
+              <li><strong>Use TCM to Shop</strong>: Use the TCM you’ve earned to purchase products available in our store. Simply add items to your cart, proceed to checkout, and the total amount will be deducted from your TCM wallet.</li>
+          </ul>
+          <p>By registering products on our platform, you can earn TCM and use it to enjoy a wide variety of items in our store. Start registering your products today and take advantage of our unique reward system!</p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card">
+          <article class="card-body">
+            {% include "includes/alerts.html" %}
+            <header class="mb-4"><h4 class="card-title">Register Product</h4></header>
+            <form enctype="multipart/form-data" action="#" method="POST">
+              {% csrf_token %}
+    
+              <div class="form-row">
+                <div class="col form-group">
+                    <label>Product Name</label><br>
+                    {{ product_form.product_name }}
+                </div> <!-- form-group end.// -->
+              </div> <!-- form-row end.// -->
+              <div class="form-row">
+                <div class="col form-group">
+                    <label>Product Category</label>
+                    {{ product_form.category }}
+                </div> <!-- form-group end.// -->
+              </div> <!-- form-row end.// -->
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label>Description</label><br>
+                  {{ product_form.description }}<br>
+                  <small>Tell us about your product details and its condition.</small>
+                </div> <!-- form-group end.// -->
+                <div class="form-group col-md-6">
+                  <label>Upload Product Images</label>
+                  <input type="file" name="image" id="id_image" multiple class="form-control">
+                </div> <!-- form-group end.// -->
+              </div>
+              <div class="terms-container">
+                <input type="checkbox" class="terms-checkbox" id="id_terms" name="terms" required>
+                <label class="terms-label" for="id_terms">
+                    I accept the <a href="{% url 'terms_of_use' %}">terms and conditions</a>
+                </label>
+            </div>
+            <br>
+              <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-block"> Register </button>
+              </div> <!-- form-group// -->      
+            </form>
+
+            <script>
+              document.getElementById('id_images').addEventListener('change', function() {
+                  var fileList = document.getElementById('file-list');
+                  fileList.innerHTML = '';  // Clear any existing file names
+                  for (var i = 0; i < this.files.length; i++) {
+                      var file = this.files[i];
+                      var listItem = document.createElement('div');
+                      listItem.textContent = file.name;
+                      fileList.appendChild(listItem);
+                  }
+              });
+          </script>
+
+          </article><!-- card-body.// -->
+        </div> <!-- card .// -->
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

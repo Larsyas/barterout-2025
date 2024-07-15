@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            Confirm Exchange
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Product: {{ user_product.product_name }}</h5>
+            <p class="card-text">You have been offered {{ user_product.tcm_payment }} TCM for this product. Do you accept this exchange?</p>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" name="accept" class="btn btn-success">Accept</button>
+                <button type="submit" name="reject" class="btn btn-danger">Reject</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
