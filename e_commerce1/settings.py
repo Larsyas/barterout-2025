@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from django.contrib.messages import constants as messages
 from pathlib import Path
 from decouple import config
+import dj_database_url
+import django_heroku
+import os
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -56,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 SESSION_EXPIRE_SECONDS = 86400  # 24 Hours
@@ -163,3 +168,15 @@ EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+
+
+
+# Heroku
+django_heroku.settings(locals())
+# Para configuração de banco de dados com dj_database_url
+DATABASES = {
+    'default': dj_database_url.config(conn_max_age=600)
+}
+
+# Simplify static file serving
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
