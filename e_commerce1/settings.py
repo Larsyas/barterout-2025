@@ -171,9 +171,12 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 
 
 
-# Heroku
-django_heroku.settings(locals())
-
-
 # Simplify static file serving
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
+try:
+    from e_commerce1.local_settings import *
+except ImportError:
+    ...
