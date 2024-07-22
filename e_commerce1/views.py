@@ -9,9 +9,12 @@ def home(request):
             average_rating=Avg('reviewrating__rating')
     ).order_by('-average_rating', 'created_date')
 
+    reviews = []  # Inicializa `reviews` com uma lista vazia
+
     for product in products:
-        reviews = ReviewRating.objects.filter(
+        product_reviews = ReviewRating.objects.filter(
             product_id=product.id, status=True)
+        reviews.extend(product_reviews)
 
     context = {
         'products': products,

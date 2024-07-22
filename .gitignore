@@ -130,7 +130,8 @@ local_settings.py
 
 # # SageMath parsed files
 # *.sage.py
-
+meapaga.txt
+meapaga2.txt
 # # Environments
 env
 # .venv
@@ -139,8 +140,6 @@ env
 # ENV/
 # env.bak/
 # venv.bak/
-requirements.txt
-requirements
 # # Spyder project settings
 # .spyderproject
 # .spyproject
