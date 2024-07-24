@@ -14,7 +14,6 @@ from django.contrib.messages import constants as messages
 from pathlib import Path
 from decouple import config
 import dj_database_url
-import django_heroku
 import os
 
 
