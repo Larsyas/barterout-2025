@@ -143,7 +143,7 @@ STATICFILES_DIRS = [
     'e_commerce1/static'
 ]
 
-SITE_URL = 'http://www.barterout.com.br/'
+SITE_URL = 'http://localhost:8000' # CHANGE-ME ON DEPLOY
 
 # media files configuration
 MEDIA_URL = '/media/'
