@@ -7,8 +7,10 @@
 # *.pyc
 # __pycache__/
 local_settings.py
-# db.sqlite3
-# db.sqlite3-journal
+db.sqlite3
+db.sqlite3-journal
+gunicorn-error-log
+.vscode
 # media
 
 # # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
@@ -132,6 +134,7 @@ local_settings.py
 # *.sage.py
 meapaga.txt
 meapaga2.txt
+nginx-https.txt
 # # Environments
 env
 # .venv
@@ -173,6 +176,7 @@ env
 
 # # End of https://www.toptal.com/developers/gitignore/api/django
 # # Elastic Beanstalk Files
-# .elasticbeanstalk/*
+.elasticbeanstalk
+.ebextensions
 # !.elasticbeanstalk/*.cfg.yml
 # !.elasticbeanstalk/*.global.yml
