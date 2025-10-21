@@ -1,6 +1,6 @@
 from email.message import EmailMessage
 from django.shortcuts import get_object_or_404, render, redirect
-
+from django.conf import settings
 from orders.models import Order, OrderProduct
 from store.models import UserProduct
 from .forms import RegistrationForm, UserForm, UserProfileForm
@@ -28,7 +28,7 @@ def register(request):
         if form.is_valid():
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
+            email = form.cleaned_data['email'].strip()
             phone_number = form.cleaned_data['phone_number']
             document = form.cleaned_data['document']
             address = form.cleaned_data['address']
@@ -59,16 +59,30 @@ def register(request):
 
             # USER ACTIVATION:
             current_site = get_current_site(request)
-            mail_subject = 'Please activate your account.'
-            message = render_to_string('accounts/account_verification_email.html', {
-                'user': user,
-                'domain': current_site,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': default_token_generator.make_token(user),
-            })
-            to_email = email
-            send_email = EmailMessage(mail_subject, message, to=[to_email])
-            send_email.send()
+            try:
+                mail_subject = 'Please activate your account.'
+                message = render_to_string('accounts/account_verification_email.html', {
+                    'user': user,
+                    'domain': current_site,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': default_token_generator.make_token(user),
+                })
+
+                to_email = email.strip()
+                send_email = EmailMessage(
+                    subject=mail_subject,
+                    body=message,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    to=[to_email],
+                )
+                send_email.content_subtype = 'html'  # Garante que envie HTML
+                result = send_email.send(fail_silently=False)
+                print("RESULTADO DO ENVIO:", result)
+
+            except Exception as e:
+                import traceback
+                print("ERRO AO ENVIAR EMAIL:", e)
+                traceback.print_exc()
 
             # messages.success(
             #     request, 'Thank you for registering with us. We have sent you an activation link to your email address, please verify it.')
