@@ -7,25 +7,27 @@ WORKDIR /app
 # Instalar dependências do sistema (necessárias para Django e Pillow)
 RUN apt-get update && apt-get install -y \
     build-essential \
-    libpq-dev \
     libjpeg-dev \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copiar arquivos do projeto
-COPY . /app
+# Copiar apenas requirements.txt primeiro para usar cache do Docker
+COPY requirements.txt .
 
 # Instalar dependências Python
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Coletar arquivos estáticos
-RUN python manage.py collectstatic --noinput
+# Copiar todo o projeto
+COPY . .
 
-# Definir variáveis de ambiente padrão
+# Definir variáveis de ambiente
 ENV PYTHONUNBUFFERED=1
+ENV PORT=8080
 
 # Expor porta
 EXPOSE 8080
 
-# Comando de execução (gunicorn é recomendado no Cloud Run)
+# Comando para rodar o Django no Cloud Run
+# O collectstatic e migrate serão rodados em entrypoint (em tempo de execução)
 CMD ["gunicorn", "e_commerce1.wsgi:application", "--bind", "0.0.0.0:8080"]
