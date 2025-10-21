@@ -30,4 +30,4 @@ EXPOSE 8080
 
 # Comando para rodar o Django no Cloud Run
 # O collectstatic e migrate serão rodados em entrypoint (em tempo de execução)
-CMD CMD ["./entrypoint.sh"]
+CMD ["./entrypoint.sh"]
