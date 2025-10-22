@@ -187,8 +187,8 @@ CSRF_TRUSTED_ORIGINS = [
 # Indica que a aplicação está atrás de um proxy HTTPS (Cloud Run)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
 
 try:
     from e_commerce1.local_settings import *
