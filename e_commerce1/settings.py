@@ -32,7 +32,13 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-kg%=o_mmj=%v7il0jbk90
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+        "barter-out1-557728901802.us-central1.run.app",
+        "www.barterout.com",
+        "www.barterout.com.br",
+        "barterout.com",
+        "barterout.com.br",
+]
 
 
 # Application definition
@@ -185,7 +191,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 # Indica que a aplicação está atrás de um proxy HTTPS (Cloud Run)
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ('X-Forwarded-Proto', 'https')
 
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
