@@ -183,6 +183,8 @@ CSRF_TRUSTED_ORIGINS = [
     "https://barterout.com.br",
 ]
 
+# Indica que a aplicação está atrás de um proxy HTTPS (Cloud Run)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 try:
