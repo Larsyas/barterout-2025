@@ -183,11 +183,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 CSRF_TRUSTED_ORIGINS = [
     "https://barter-out1-557728901802.us-central1.run.app",
-    "http://barter-out1-557728901802.us-central1.run.app",
-    "https://www.barterout.com",
-    "https://www.barterout.com.br",
-    "https://barterout.com",
-    "https://barterout.com.br",
 ]
 
 # Indica que a aplicação está atrás de um proxy HTTPS (Cloud Run)

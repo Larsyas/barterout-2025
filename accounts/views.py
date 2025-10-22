@@ -9,6 +9,7 @@ from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from carts.views import _cart_id
 from carts.models import Cart, CartItem
+from django.views.decorators.csrf import csrf_exempt
 import requests
 
 # Verification email
@@ -21,6 +22,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 
 
+@csrf_exempt
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
