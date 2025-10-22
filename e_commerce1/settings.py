@@ -175,6 +175,15 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://barter-out1-557728901802.us-central1.run.app",
+    "https://www.barterout.com",
+    "https://www.barterout.com.br",
+    "https://barterout.com",
+    "https://barterout.com.br",
+]
+
+
 
 try:
     from e_commerce1.local_settings import *
