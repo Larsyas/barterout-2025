@@ -33,11 +33,9 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-kg%=o_mmj=%v7il0jbk90
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = [
-        "barter-out1-557728901802.us-central1.run.app",
-        "www.barterout.com",
-        "www.barterout.com.br",
-        "barterout.com",
-        "barterout.com.br",
+    'barter-out1-557728901802.us-central1.run.app',
+    'localhost', '127.0.0.1',
+    'barterout.com.br', 'www.barterout.com.br',
 ]
 
 
@@ -182,14 +180,16 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://barter-out1-557728901802.us-central1.run.app",
+    'https://barter-out1-557728901802.us-central1.run.app',
+    'https://barterout.com.br',
+    'https://www.barterout.com.br',
 ]
 
-# Indica que a aplicação está atrás de um proxy HTTPS (Cloud Run)
-SECURE_PROXY_SSL_HEADER = ('X-Forwarded-Proto', 'https')
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-CSRF_COOKIE_SECURE = False
-SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True  # força HTTPS
 
 try:
     from e_commerce1.local_settings import *
