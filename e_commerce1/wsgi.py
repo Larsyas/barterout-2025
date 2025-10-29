@@ -14,3 +14,7 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'e_commerce1.settings')
 
 application = get_wsgi_application()
+
+# Chamada de startup (após a app estar pronta)
+from e_commerce1.startup import ensure_superuser  # <-- importa do arquivo que criamos
+ensure_superuser()
