@@ -196,15 +196,22 @@ SESSION_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True  # força HTTPS
 USE_X_FORWARDED_HOST = True
 
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    f"postgresql://{os.getenv('DB_USER','django')}:{os.getenv('DB_PASS','')}"
-    f"@/cloudsql/{os.getenv('INSTANCE_CONNECTION_NAME','')}/{os.getenv('DB_NAME','barterout')}"
-)
-DATABASES = {
-    "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=False)
-}
+DB_NAME = os.environ.get("DB_NAME", "barterout")
+DB_USER = os.environ.get("DB_USER", "django")
+DB_PASS = os.environ.get("DB_PASS", "")
+INSTANCE_CONNECTION_NAME = os.environ.get("INSTANCE_CONNECTION_NAME")  # ex: "barter-out1:us-central1:barterout-pg"
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": DB_NAME,
+        "USER": DB_USER,
+        "PASSWORD": DB_PASS,
+        "HOST": f"/cloudsql/{INSTANCE_CONNECTION_NAME}",  # <- caminho do socket do Cloud SQL
+        "PORT": "5432",  # opcional com socket, mas pode deixar
+        "CONN_MAX_AGE": 600,
+    }
+}
 
 try:
     from e_commerce1.local_settings import *
