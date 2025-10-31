@@ -100,12 +100,12 @@ AUTH_USER_MODEL = 'accounts.Account'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -151,8 +151,12 @@ STATICFILES_DIRS = [
 SITE_URL = 'http://www.barterout.com.br' # CHANGE-ME ON DEPLOY
 
 # media files configuration
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# ---------- Media (GCS) ----------
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME')  # gs://<bucket>
+# URL pública para servir mídia; simples e eficaz
+MEDIA_URL = f"https://storage.googleapis.com/{GS_BUCKET_NAME}/"
+MEDIA_ROOT = ''  # não usado com GCS
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -190,6 +194,17 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True  # força HTTPS
+USE_X_FORWARDED_HOST = True
+
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    f"postgresql://{os.getenv('DB_USER','django')}:{os.getenv('DB_PASS','')}"
+    f"@/cloudsql/{os.getenv('INSTANCE_CONNECTION_NAME','')}/{os.getenv('DB_NAME','barterout')}"
+)
+DATABASES = {
+    "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=False)
+}
+
 
 try:
     from e_commerce1.local_settings import *
