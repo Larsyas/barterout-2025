@@ -10,7 +10,8 @@ django-admin-honeypot==1.1.0
 django-admin-thumbnails==0.2.9
 # django-heroku==0.3.1
 django-session-timeout==0.1.0
-django-storages
+django-storages[google]
+google-cloud-storage
 gunicorn==22.0.0
 idna==3.7
 jmespath==1.0.1

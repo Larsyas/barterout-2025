@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'category',
     'accounts',
     'store',
@@ -152,11 +153,16 @@ SITE_URL = 'http://www.barterout.com.br' # CHANGE-ME ON DEPLOY
 
 # media files configuration
 # ---------- Media (GCS) ----------
-DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME')  # gs://<bucket>
-# URL pública para servir mídia; simples e eficaz
-MEDIA_URL = f"https://storage.googleapis.com/{GS_BUCKET_NAME}/"
-MEDIA_ROOT = ''  # não usado com GCS
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Se GCS estiver configurado, usa GCS
+GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME')
+
+if GS_BUCKET_NAME:
+    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    MEDIA_URL = f"https://storage.googleapis.com/{GS_BUCKET_NAME}/"
+    MEDIA_ROOT = ''  # não usado com GCS
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
