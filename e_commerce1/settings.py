@@ -152,17 +152,28 @@ STATICFILES_DIRS = [
 SITE_URL = 'http://www.barterout.com.br' # CHANGE-ME ON DEPLOY
 
 # media files configuration
-# ---------- Media (GCS) ----------
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# ---------- Media / Google Cloud Storage ----------
 
-# Se GCS estiver configurado, usa GCS
-GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME')
+GS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME')  # "barterout-media-557728901802"
 
-if GS_BUCKET_NAME:
-    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-    MEDIA_URL = f"https://storage.googleapis.com/{GS_BUCKET_NAME}/"
-    MEDIA_ROOT = ''  # não usado com GCS
+# NÃO gerar URL assinada (usa public_url do objeto)
+GS_QUERYSTRING_AUTH = False
+
+# Não usar ACL legado (você está usando IAM + bucket público)
+GS_DEFAULT_ACL = None
+
+# Não sobrescrever arquivos com mesmo nome (boa prática)
+GS_FILE_OVERWRITE = False
+
+# Backend padrão do django-storages para GCS
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+
+# URL pública simples do GCS
+MEDIA_URL = f"https://storage.googleapis.com/{GS_BUCKET_NAME}/"
+
+# Com GCS, MEDIA_ROOT não é usado; pode ser string vazia
+MEDIA_ROOT = ''
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
