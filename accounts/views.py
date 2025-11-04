@@ -208,7 +208,11 @@ def dashboard(request):
         '-created_at').filter(user_id=request.user.id, is_ordered=True)
     orders_count = orders.count()
 
-    userprofile = UserProfile.objects.get(user_id=request.user.id)
+    userprofile, _ = UserProfile.objects.get_or_create(
+    user_id=request.user.id,
+    defaults={"profile_picture": "default/default-user.png"}
+    )
+
     context = {
         'orders_count': orders_count,
         'userprofile': userprofile,
@@ -298,7 +302,11 @@ def my_orders(request):
 
 @login_required(login_url='login')
 def edit_profile(request):
-    userprofile = get_object_or_404(UserProfile, user=request.user)
+    userprofile, _ = UserProfile.objects.get_or_create(
+    user=request.user,
+    defaults={"profile_picture": "default/default-user.png"}
+    )
+
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = UserProfileForm(
