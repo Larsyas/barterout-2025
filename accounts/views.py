@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from carts.views import _cart_id
 from carts.models import Cart, CartItem
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
 import requests
 
 # Verification email
@@ -201,23 +202,33 @@ def activate(request, uidb64, token):
         return redirect('register')
 
 
-# preciso colocar isso na hora de criar a view de revisoes.
 @login_required(login_url='login')
 def dashboard(request):
-    orders = Order.objects.order_by(
-        '-created_at').filter(user_id=request.user.id, is_ordered=True)
-    orders_count = orders.count()
+    try:
+        orders = Order.objects.order_by(
+            '-created_at').filter(user_id=request.user.id, is_ordered=True)
+        orders_count = orders.count()
 
-    userprofile, _ = UserProfile.objects.get_or_create(
-    user_id=request.user.id,
-    defaults={"profile_picture": "default/default-user.png"}
-    )
+        # garante que sempre exista um UserProfile
+        userprofile, _ = UserProfile.objects.get_or_create(
+            user_id=request.user.id,
+            defaults={"profile_picture": "default/default-user.png"},
+        )
 
-    context = {
-        'orders_count': orders_count,
-        'userprofile': userprofile,
-    }
-    return render(request, 'accounts/dashboard.html', context)
+        context = {
+            'orders_count': orders_count,
+            'userprofile': userprofile,
+        }
+        return render(request, 'accounts/dashboard.html', context)
+
+    except Exception as e:
+        # DEBUG: loga no console (vai pro Cloud Logging) e mostra algo na tela
+        import traceback
+        traceback.print_exc()
+        return HttpResponse(
+            f"Erro no dashboard: {e}",
+            status=500,
+        )
 
 
 def forgotPassword(request):
