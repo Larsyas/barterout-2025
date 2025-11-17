@@ -10,11 +10,11 @@
 
     {% if request.GET.command == 'verification' %}
       <div class="container mx-auto alert alert-info text-center" role="alert" style="max-width: 1024px; margin-top:100px;">
-        Thank you for registering with us. We have sent you an activation link to your email address ({{request.GET.email}}), please verify it.
+        Obrigado por se registrar conosco. Enviamos um link de ativação para o seu e-mail ({{request.GET.email}}), por favor, verifique-o.
         <br>
-        (Check your spam if you can't find the activation link.)
+        (Confira a sua caixa de spam se não encontrar o link de ativação.)
         <br><br>
-        Already verified? <a href="{% url "login" %}">Login</a>
+        Já verificou? <a href="{% url "login" %}">Entrar</a>
       </div>
 
     {% else %}
@@ -22,7 +22,7 @@
         <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
 
           <div class="card-body">
-          <h4 class="card-title mb-4">Sign in</h4>
+          <h4 class="card-title mb-4">Entrar</h4>
         {% include "includes/alerts.html" %}
 
           <form action="{% url "login" %}" method="POST">
@@ -30,24 +30,24 @@
 
 
               <div class="form-group">
-                 <input type="email" class="form-control" placeholder="Email Address" name="email">
+                 <input type="email" class="form-control" placeholder="Endereço de e-mail" name="email">
               </div> <!-- form-group// -->
               <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" name="password">
+                <input type="password" class="form-control" placeholder="Senha" name="password">
               </div> <!-- form-group// -->
               
               <div class="form-group">
-                  <a href="{% url "forgotPassword" %}" class="float-right">Forgot password?</a> 
+                  <a href="{% url "forgotPassword" %}" class="float-right">Esqueceu a senha?</a> 
                
               </div> <!-- form-group form-check .// -->
               <div class="form-group">
-                  <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+                  <button type="submit" class="btn btn-primary btn-block"> Entrar  </button>
               </div> <!-- form-group// -->    
           </form>
           </div> <!-- card-body.// -->
         </div> <!-- card .// -->
     
-         <p class="text-center mt-4">Don't have account? <a href="{% url "register" %}">Sign up</a></p>
+         <p class="text-center mt-4">Não tem conta? <a href="{% url "register" %}">Cadastre-se</a></p>
          <br><br>
     <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
 

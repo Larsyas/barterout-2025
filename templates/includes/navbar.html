@@ -10,17 +10,17 @@
                 <div class="col-lg col-sm col-md col-6 flex-grow-0">
                     <div class="category-wrap dropdown d-inline-block float-right">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bars"></i> All category
+                            <i class="fa fa-bars"></i> Todas as Categorias
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'store' %}">All Products</a>
+                            <a class="dropdown-item" href="{% url 'store' %}">Todos os Produtos</a>
                             {% for category in links %}
                                 <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
-                <a href="{% url 'store' %}" class="btn btn-outline-primary">Store</a>
+                <a href="{% url 'store' %}" class="btn btn-outline-primary">Loja</a>
                 <div class="col-lg col-md-6 col-sm-6">
                     <form action="{% url 'search' %}" class="search" method="GET">
                         <div class="input-group w-100">
@@ -37,27 +37,27 @@
                     <div class="d-flex justify-content-end mb-3 mb-lg-0 nav-options">
                         {% if user.id is None %}
                             <div class="widget-header">
-                                <small class="title text-muted">Welcome guest!</small>
+                                <small class="title text-muted">Bem Vindo(a), visitante!</small>
                                 <div>
-                                    <a href="{% url 'login' %}">Sign in</a> <span class="dark-transp"> | </span>
-                                    <a href="{% url 'register' %}">Register</a>
+                                    <a href="{% url 'login' %}">Entre</a> <span class="dark-transp"> | </span>
+                                    <a href="{% url 'register' %}">Crie a sua conta</a>
                                 </div>
                             </div>
                         {% else %}
                             <div class="widget-header">
                                 <small class="title text-muted">
-                                    Welcome    <b>  {{ user.first_name }}!  |</b> 
+                                    Bem-vindo(a)    <b>  {{ user.first_name }}!  |</b> 
                                     <b>  {{ TCM_wallet }} TCM</b>
                                     <span class="tcm-icon-container">
                                         <img class="tcm-icon" src="{% static 'images/BARTER_OUT.png' %}" alt="TCM Icon">
                                     </span>
                                 </small>
                                 <div class="widget-links">
-                                    <a href="{% url 'register_product' %}">Register Product</a>
+                                    <a href="{% url 'register_product' %}">Cadastrar Produto</a>
                                     <span class="dark-transp"> | </span>
                                     <a href="{% url 'dashboard' %}">Dashboard</a>
                                     <span class="dark-transp"> | </span>
-                                    <a href="{% url 'logout' %}">Logout</a>
+                                    <a href="{% url 'logout' %}">Sair</a>
                                 </div>
                             </div>
                         {% endif %}

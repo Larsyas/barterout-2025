@@ -12,7 +12,7 @@
 	<main class="col-md-9">
 		<article class="card">
 		<header class="card-header">
-			<strong class="d-inline-block mr-3">Your products history</strong>
+			<strong class="d-inline-block mr-3">Histórico dos seus produtos</strong>
 
 		</header>
 		<div class="card-body">
@@ -21,10 +21,10 @@
 				<table class="table table-hover">
 				  <thead>
 				    <tr>
-				      <th scope="col">Product Name</th>
+				      <th scope="col">Nome do produto</th>
 				      <th scope="col">Status</th>
-				      <th scope="col">TCM Payment Received</th>
-					  <th scope="col">Date of Registration</th>
+				      <th scope="col">Pagamento em TCM recebido</th>
+					  <th scope="col">Data de cadastro</th>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -32,11 +32,11 @@
 				        <tr>
 				            <th scope="row">{{ user_product.product_name }}</th>
 							{% if user_product.approved is True %}
-				            	<td>Approved</td>
+				            	<td>Aprovado</td>
 							{% elif user_product.approved is not True and user_product.rejected is not True %}
-				            	<td>Under Review</td>
+				            	<td>Em análise</td>
 							{% else %}
-								<td>Rejected</td>
+								<td>Rejeitado</td>
 							{% endif %}
 
 							{% if user_product.tcm_payment is not None %}

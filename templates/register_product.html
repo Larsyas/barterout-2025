@@ -6,16 +6,16 @@
     <div class="row">
       <div class="col-md-6">
         <div class="info-box">
-          <h2>Welcome to Our Platform!</h2>
-          <p>Our platform allows you to not only purchase products using our unique virtual currency, TCM, but also to earn TCM by registering your own products. Here’s how it works:</p>
+          <h2>Bem-vindo à nossa plataforma!</h2>
+          <p>Nossa plataforma permite não apenas comprar produtos usando nossa moeda virtual, o TCM, como também ganhar TCM ao cadastrar seus próprios produtos. Veja como funciona:</p>
           <ul>
-              <li><strong>Register and Log In</strong>: Create an account on our platform and log in to access additional features.</li>
-              <li><strong>Register Your Products</strong>: Once logged in, you can register products by providing details such as the product name, category, description, and images. Submit your product for review.</li>
-              <li><strong>Product Review</strong>: Our team of administrators will review the products you register. They will approve or reject your products based on our quality standards.</li>
-              <li><strong>Earn TCM</strong>: If your product is approved, you will receive a certain amount of TCM as a reward. The amount of TCM you receive is determined by the admin during the approval process.</li>
-              <li><strong>Use TCM to Shop</strong>: Use the TCM you’ve earned to purchase products available in our store. Simply add items to your cart, proceed to checkout, and the total amount will be deducted from your TCM wallet.</li>
+              <li><strong>Cadastre-se e faça login</strong>: Crie uma conta na plataforma e entre para acessar recursos adicionais.</li>
+              <li><strong>Cadastre seus produtos</strong>: Depois de entrar, você pode cadastrar produtos informando detalhes como nome, categoria, descrição e imagens. Envie o produto para análise.</li>
+              <li><strong>Análise do produto</strong>: Nossa equipe de administradores avaliará os produtos cadastrados e poderá aprová-los ou rejeitá-los com base em nossos padrões de qualidade.</li>
+              <li><strong>Ganhe TCM</strong>: Se o seu produto for aprovado, você receberá uma quantidade de TCM como recompensa. O valor é definido pelo administrador durante a aprovação.</li>
+              <li><strong>Use TCM para comprar</strong>: Utilize o TCM que você ganhou para adquirir produtos disponíveis em nossa loja. Basta adicionar itens ao carrinho, finalizar a compra e o total será debitado da sua carteira TCM.</li>
           </ul>
-          <p>By registering products on our platform, you can earn TCM and use it to enjoy a wide variety of items in our store. Start registering your products today and take advantage of our unique reward system!</p>
+          <p>Ao cadastrar produtos na nossa plataforma, você pode ganhar TCM e usá-lo para aproveitar uma grande variedade de itens na loja. Comece a cadastrar hoje e aproveite nosso sistema exclusivo de recompensas!</p>
         </div>
       </div>
 
@@ -23,42 +23,42 @@
         <div class="card">
           <article class="card-body">
             {% include "includes/alerts.html" %}
-            <header class="mb-4"><h4 class="card-title">Register Product</h4></header>
+            <header class="mb-4"><h4 class="card-title">Cadastrar Produto</h4></header>
             <form enctype="multipart/form-data" action="#" method="POST">
               {% csrf_token %}
     
               <div class="form-row">
                 <div class="col form-group">
-                    <label>Product Name</label><br>
+                    <label>Nome do produto</label><br>
                     {{ product_form.product_name }}
                 </div> <!-- form-group end.// -->
               </div> <!-- form-row end.// -->
               <div class="form-row">
                 <div class="col form-group">
-                    <label>Product Category</label>
+                    <label>Categoria do produto</label>
                     {{ product_form.category }}
                 </div> <!-- form-group end.// -->
               </div> <!-- form-row end.// -->
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <label>Description</label><br>
+                  <label>Descrição</label><br>
                   {{ product_form.description }}<br>
-                  <small>Tell us about your product details and its condition.</small>
+                  <small>Conte os detalhes do seu produto e o seu estado de conservação.</small>
                 </div> <!-- form-group end.// -->
                 <div class="form-group col-md-6">
-                  <label>Upload Product Images</label>
+                  <label>Enviar imagens do produto</label>
                   <input type="file" name="image" id="id_image" multiple class="form-control">
                 </div> <!-- form-group end.// -->
               </div>
               <div class="terms-container">
                 <input type="checkbox" class="terms-checkbox" id="id_terms" name="terms" required>
                 <label class="terms-label" for="id_terms">
-                    I accept the <a href="{% url 'terms_of_use' %}">terms and conditions</a>
+                    Eu aceito os <a href="{% url 'terms_of_use' %}">termos e condições</a>
                 </label>
             </div>
             <br>
               <div class="form-group">
-                  <button type="submit" class="btn btn-primary btn-block"> Register </button>
+                  <button type="submit" class="btn btn-primary btn-block"> Cadastrar </button>
               </div> <!-- form-group// -->      
             </form>
 

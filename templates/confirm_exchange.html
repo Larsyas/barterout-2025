@@ -4,11 +4,11 @@
 <div class="container mt-4">
     <div class="card">
         <div class="card-header">
-            Confirm Exchange
+            Confirmar oferta
         </div>
         <div class="card-body">
-            <h5 class="card-title">Product: {{ user_product.product_name }}</h5>
-            <p class="card-text">You have been offered {{ user_product.tcm_payment }} TCM for this product. Do you accept this exchange?</p>
+            <h5 class="card-title">Produto: {{ user_product.product_name }}</h5>
+            <p class="card-text">Você recebeu a oferta de {{ user_product.tcm_payment }} TCM por esse produto. Você aceita a oferta?</p>
             <form method="POST">
                 {% csrf_token %}
                 <button type="submit" name="accept" class="btn btn-success">Accept</button>

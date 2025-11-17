@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+ {% extends "base.html" %}
 {% load static %}
 
 <link href="{% static "css/custom.css" %}" rel="stylesheet" type="text/css"/>
@@ -13,61 +13,61 @@
     <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
       <article class="card-body">
         {% include "includes/alerts.html" %}
-        <header class="mb-4"><h4 class="card-title">Sign up</h4></header>
+        <header class="mb-4"><h4 class="card-title">Cadastre-se</h4></header>
         <form action="{% url "register" %}" method="POST">
           {% csrf_token %}
 
           
                 <div class="form-row">
                     <div class="col form-group">
-                        <label>First name</label>
+                        <label>Nome</label>
                         {{ form.first_name }}
                     </div> <!-- form-group end.// -->
                     <div class="col form-group">
-                        <label>Last name</label>
+                        <label>Sobrenome</label>
                         {{ form.last_name }}
                     </div> <!-- form-group end.// -->
                 </div> <!-- form-row end.// -->
 
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                      <label>Email Address</label>
+                      <label>Endereço de e-mail</label>
                       {{ form.email }}
-                      <small>We'll never share your information with anyone.</small>
+                      <small>Nunca compartilharemos suas informações com ninguém.</small>
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-6">
-                      <label>Phone Number</label>
+                      <label>Telefone</label>
                       {{ form.phone_number }}
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-6">
-                      <label>Document</label>
+                      <label>Documento</label>
                       {{ form.document }}
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-12">
-                      <label>Address</label>
+                      <label>Endereço</label>
                       {{ form.address }}
                     </div> <!-- form-group end.// -->
                 </div> <!-- form-row.// -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Create password</label>
+                        <label>Criar senha</label>
                         {{ form.password }}
                         {{ form.password.help_text }}
                     </div> <!-- form-group end.// --> 
                     <div class="form-group col-md-6">
-                        <label>Repeat password</label>
+                        <label>Repetir senha</label>
                         {{ form.confirm_password }}
                       </div> <!-- form-group end.// -->  
                       <div class="terms-container">
                         <input type="checkbox" class="terms-checkbox" id="id_terms" name="terms" required>
                         <label class="terms-label" for="id_terms">
-                            I've read and I accept the <a href="{% url 'terms_of_use' %}">Terms and Conditions</a>
+                            Li e aceito os <a href="{% url 'terms_of_use' %}">Termos e Condições</a>
                         </label>
                     </div>
                 </div>
                 <br>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Register  </button>
+                    <button type="submit" class="btn btn-primary btn-block"> Cadastrar  </button>
                 </div> <!-- form-group// -->      
             {{ form.email.errors }}
             {{ form.non_field_errors }}
@@ -76,7 +76,7 @@
             </form>
         </article><!-- card-body.// -->
     </div> <!-- card .// -->
-    <p class="text-center mt-4">Have an account? <a href="{% url "login" %}">Log In</a></p>
+    <p class="text-center mt-4">Já tem uma conta? <a href="{% url "login" %}">Entrar</a></p>
     <br><br>
 <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
     

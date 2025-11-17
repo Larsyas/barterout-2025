@@ -8,44 +8,44 @@
     <div class="container">
     
     <!-- ============================ COMPONENT 1 ================================= -->
-    <h4 class="text-center mb-10">Review Your Order Details</h4>
+    <h4 class="text-center mb-10">Revise os detalhes do seu pedido</h4>
     <div class="row">
         <aside class="col-lg-8">
             <div class="card">
-                <h5 class="card-header">Billing Address</h5>
+                <h5 class="card-header">Endereço de cobrança</h5>
                 <div class="card-body">
-                  <p class="card-text">Full Name: <b>{{order.full_name}}</b></p>
+                  <p class="card-text">Nome completo: <b>{{order.full_name}}</b></p>
                   {% if order.address_line_2 %}
-                    <p class="card-text">Addresses: <b>{{order.full_address}}</b></p>
+                    <p class="card-text">Endereços: <b>{{order.full_address}}</b></p>
                   {% else %}
-                    <p class="card-text">Address: <b>{{order.address_line_1}}</b></p>
+                    <p class="card-text">Endereço: <b>{{order.address_line_1}}</b></p>
                   {% endif %}
-                  <p class="card-text">City/State: <b>{{order.city}}, {{order.state}}</b></p>
-                  <p class="card-text">Country: <b>{{order.country}}</b></p>
-                  <p class="card-text">Email: <b>{{order.email}}</b></p>
-                  <p class="card-text">Phone Number: <b>{{order.phone}}</b></p>
+                  <p class="card-text">Cidade/Estado: <b>{{order.city}}, {{order.state}}</b></p>
+                  <p class="card-text">País: <b>{{order.country}}</b></p>
+                  <p class="card-text">E-mail: <b>{{order.email}}</b></p>
+                  <p class="card-text">Telefone: <b>{{order.phone}}</b></p>
                   {% if order.order_note %}
-                  <b>Order Note: </b> {{order.order_note}}
+                  <b>Observação do pedido: </b> {{order.order_note}}
                   {% endif %}
 
 
                 </div>
               </div> <!-- card.// -->
               <div class="card">
-                <h5 class="card-header">TCM Payment</h5>
+                <h5 class="card-header">Pagamento com TCM</h5>
                 <div class="card-body">
-                  <h5 class="card-text">{{total}} TCM <span><img class="tcm" src="{% static 'images/BARTER_OUT.png' %}" alt="TCM Icon" width="47" height="55" style="margin-bottom: 10px"></span> From your TCM Wallet</h5>
+                  <h5 class="card-text">{{total}} TCM <span><img class="tcm" src="{% static 'images/BARTER_OUT.png' %}" alt="TCM Icon" width="47" height="55" style="margin-bottom: 10px"></span> da sua Carteira TCM</h5>
                 </div>
               </div> <!-- card.// -->
               <div class="card">
-                <h5 class="card-header">Review Products</h5>
+                <h5 class="card-header">Revisar produtos</h5>
                 <div class="card-body">
                     <table class="table table-borderless table-shopping-cart">
                         <thead class="text-muted">
                         <tr class="small text-uppercase">
-                          <th scope="col">Product</th>
-                          <th scope="col" width="120">Quantity</th>
-                          <th scope="col" width="120">Price</th>
+                          <th scope="col">Produto</th>
+                          <th scope="col" width="120">Quantidade</th>
+                          <th scope="col" width="120">Preço</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -79,7 +79,7 @@
                                     {% if cart_item.quantity == 1 %}
                                     <small class="text-muted">{{ cart_item.product.price }} TCM</small> 
                                     {% else %}
-                                    <small class="text-muted">{{ cart_item.product.price }} TCM each</small> 
+                                    <small class="text-muted">{{ cart_item.product.price }} TCM cada</small> 
                                     {% endif %}
                     
                                 </div> <!-- price-wrap .// -->
@@ -100,12 +100,12 @@
             <div class="card">
             <div class="card-body">
                 {% comment %} <dl class="dlist-align">
-                  <dt>Total price:</dt>
+                  <dt>Valor total:</dt>
                   <dd class="text-right">{{ total }} TCM</dd>
                 </dl>
                 <dl class="dlist-align">
-                  <dt>Tax:</dt>
-                  <dd class="text-right"> $10.00</dd>
+                  <dt>Taxa:</dt>
+                  <dd class="text-right> $10.00</dd>
                 </dl> {% endcomment %}
                 <dl class="dlist-align">
                   <dt>Total:</dt>
@@ -117,7 +117,7 @@
                 </p> {% endcomment %}
                 <form action="{% url "orders:process_payment" order.order_number %}" method="POST">
                     {% csrf_token %}
-                    <button name="submit" class="btn btn-primary btn-block"> Make Payment </button>
+                    <button name="submit" class="btn btn-primary btn-block"> Efetuar pagamento </button>
                 </form>
             </div> <!-- card-body.// -->
             </div> <!-- card.// -->

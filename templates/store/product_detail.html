@@ -55,7 +55,7 @@
                 <hr>
                     <div class="row">
                         <div class="item-option-select">
-                            <h6>Choose Color</h6>
+                            <h6>Escolher Cor</h6>
                             <select name="color" class="form-control" required>
                                 <option value="" disabled selected>-</option>
                                 {% for i in single_product.variation_set.colors %}
@@ -66,7 +66,7 @@
                     </div> <!-- row.// -->
                     <div class="row">
                         <div class="item-option-select">
-                            <h6>Select Size</h6>
+                            <h6>Selecionar Tamanho</h6>
                             <select name="size" class="form-control" required>
                                 <option value="" disabled selected>-</option>
                                 {% for i in single_product.variation_set.sizes %}
@@ -78,13 +78,13 @@
                         <hr>
                         {% endif %}
                         {% if single_product.stock == 0 %}
-                            <h5>Out of Stock</h5>
+                            <h5>Esgotado</h5>
                         {% elif single_product.stock <= 5 %}
                             <br>
-                            <h5 style="color: #BE6D03; cursor: default"><strong>Only {{single_product.stock}} left on our stock!!</h5></strong>
-                            <button type="submit" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </button>
+                            <h5 style="color: #BE6D03; cursor: default"><strong>Apenas {{single_product.stock}} restante no nosso inventário!!</h5></strong>
+                            <button type="submit" class="btn  btn-primary"> <span class="text">Adicionar ao carrinho</span> <i class="fas fa-shopping-cart"></i>  </button>
                         {% else %}
-                            <button type="submit" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </button>
+                            <button type="submit" class="btn  btn-primary"> <span class="text">Adicionar ao carrinho</span> <i class="fas fa-shopping-cart"></i>  </button>
                         {% endif %}
 
                 </article> <!-- product-info-aside .// -->
@@ -102,10 +102,10 @@
 
         <form action="{% url "submit_review" single_product.id %}" method="POST">
             {% csrf_token %}
-            <h5>Write Your Review</h5>
+            <h5>Dê a sua avaliação</h5>
             <div>
-                {% comment %} Rating stars {% endcomment %}
-                <label>How do you rate this product?</label>
+                {% comment %} Estrelas {% endcomment %}
+                <label>Como você avalia esse produto?</label>
                 <br>
                 <div class="rate">
                     <input type="radio" name="rating" id="rating10" value="5" required /><label for="rating10" title="5"></label>
@@ -121,7 +121,7 @@
                 </div>
                 <br>
 
-                Review Title:
+                Título do Review:
                 <input type="text" class="form-control" name="subject">
                 <br>
                 Review:
@@ -132,10 +132,10 @@
                     {% if orderproduct %}
                         <input type="submit" value="Submit Review" class="btn btn-primary">
                     {% else %}
-                        <p>You must purshase this product to be able to post a review.</p>
+                        <p>Você precisa adquirir o produto para poder fazer um review.</p>
                     {% endif %}
                 {% else %}
-                    <p>You must be logged in to post a review. <span><a href="{% url "login" %}">Login now</a></span></p>
+                    <p>Você deve fazer log-in para fazer um review. <span><a href="{% url "login" %}">Fazer log-in agora</a></span></p>
                 {% endif %}
 
             </div>
@@ -143,7 +143,7 @@
             <br>
         </form>
         <header class="section-heading">
-            <h3>Customer Reviews </h3>
+            <h3> Reviews </h3>
             <div class="rating-star">
                 <span>
                     <i class="fa fa-star{% if single_product.averageReview < 0.5 %}-o{% elif single_product.averageReview >= 0.5 and single_product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
@@ -155,7 +155,7 @@
 
                 </div>
                 {% if single_product.countReview %}
-                  <small>Customers Review Average Note</small>
+                  <small>Média de avaliação dos usuários</small>
                 {% endif %}
         </header>
     
