@@ -7,7 +7,7 @@ from .models import ProductImage, ReviewRating, UserProduct
 class UserProductForm(forms.ModelForm):
     terms = forms.BooleanField(
         required=True, 
-        error_messages={'required': 'You must accept the terms and conditions'}, 
+        error_messages={'required': 'Você deve aceitar os termos e condições.'}, 
         widget=forms.CheckboxInput(attrs={'class': 'terms-checkbox'})
     )
 

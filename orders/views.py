@@ -64,7 +64,7 @@ def process_payment(request, order_number):
 
         # Send order recieved email to customer
 
-        mail_subject = 'Thank you for your order!'
+        mail_subject = 'Obrigado pelo seu pedido!'
         message = render_to_string('orders/order_received_email.html', {
             'user': request.user,
             'order': order,
@@ -94,7 +94,7 @@ def process_payment(request, order_number):
 
     else:
         messages.error(
-            request, 'Insufficient TCM balance to complete the payment.')
+            request, 'Saldo de TCM insuficiente para concluir o pagamento.')
         # Redirecionar de volta para a página de pagamento
         return redirect('orders:payments')
 
@@ -110,7 +110,7 @@ def place_order(request, total=0, quantity=0,):
 
     # elif cart_count > cart_item.product.stock:
     #     messages.error(
-    #         request, "Sorry, we don't have that quantity of that product in our stock.")
+    #         request, "Desculpe, não temos essa quantidade desse produto em estoque.")
     #     return redirect('store')
 
     for cart_item in cart_items:
@@ -121,7 +121,7 @@ def place_order(request, total=0, quantity=0,):
         # in case of we don't have enough stock to sell to the user desired quantity:
         if cart_item.quantity > cart_item.product.stock:
             messages.error(
-                request, f"Sorry, we don't have enough quantity of that {cart_item.product.product_name} product in our stock at the moment. Current stock: {cart_item.product.stock}")
+                request, f"Desculpe, não temos quantidade suficiente do produto {cart_item.product.product_name} em estoque no momento. Estoque atual: {cart_item.product.stock}")
             return redirect('checkout')
 
         else:
@@ -172,7 +172,7 @@ def place_order(request, total=0, quantity=0,):
                 return render(request, 'orders/payments.html', context)
             else:
                 messages.error(
-                    request, 'You have not enough TCM to make this purchase.')
+                    request, 'Você não tem TCM suficiente para realizar esta compra.')
                 return redirect('checkout')
 
     else:
@@ -181,20 +181,20 @@ def place_order(request, total=0, quantity=0,):
 
 # def order_complete(request):
 #     order_number = request.GET.get('order_number')
-
+#
 #     try:
 #         order = Order.objects.get(order_number=order_number, is_ordered=True)
 #         ordered_products = OrderProduct.objects.filter(order_id=order.id)
-
+#
 #         context = {
 #             'order': order,
 #             'ordered_products': ordered_products,
 #             'order_number': order.order_number,
 #         }
-
+#
 #         print(context)
 #         print(order_number)
 #         return render(request, 'orders/order_complete.html', context)
-
+#
 #     except (Order.DoesNotExist):
 #         return redirect('home')

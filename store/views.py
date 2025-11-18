@@ -134,7 +134,7 @@ def submit_review(request, product_id):
             form = ReviewForm(request.POST, instance=reviews)
             form.save()
             messages.success(
-                request, 'Thank you! Your review has been updated.')
+                request, 'Obrigado! Sua avaliação foi atualizada.')
             return redirect(url)
 
         except ReviewRating.DoesNotExist:
@@ -149,7 +149,7 @@ def submit_review(request, product_id):
                 data.user_id = request.user.id
                 data.save()
                 messages.success(
-                    request, 'Thank you! Your review has been submitted.')
+                    request, 'Obrigado! Sua avaliação foi enviada.')
                 return redirect(url)
 
 
@@ -158,7 +158,7 @@ def confirm_exchange(request, product_id):
     try:
         user_product = UserProduct.objects.get(id=product_id, created_by=request.user, approved=True)
     except UserProduct.DoesNotExist:
-        messages.error(request, 'Invalid product or you do not have permission to access this product.')
+        messages.error(request, 'Produto inválido ou você não tem permissão para acessar este produto.')
         return redirect('dashboard')  # Replace 'dashboard' with the appropriate URL name
 
     if request.method == 'POST':
@@ -167,11 +167,11 @@ def confirm_exchange(request, product_id):
             user_product.created_by.TCM_wallet += user_product.tcm_payment
             user_product.created_by.save()
             user_product.save()
-            messages.success(request, 'You have accepted the exchange and the TCM has been added to your wallet.')
+            messages.success(request, 'Você aceitou a troca e o TCM foi adicionado à sua carteira.')
         elif 'reject' in request.POST and user_product.user_confirmation is None:
             user_product.user_confirmation = False
             user_product.save()
-            messages.info(request, 'You have rejected the exchange.')
+            messages.info(request, 'Você recusou a troca.')
 
         return redirect('dashboard')  # Replace 'dashboard' with the appropriate URL name
 

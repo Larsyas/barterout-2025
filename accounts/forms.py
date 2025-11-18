@@ -5,27 +5,27 @@ from .models import Account, UserProfile
 
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder': 'Enter Password',
+        'placeholder': 'Digite a senha',
     }))
 
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder': 'Confirm Password',
+        'placeholder': 'Confirme a senha',
     }))
 
     email = forms.EmailField(
-        max_length=255, help_text="Required. Add a valid email address.")
+        max_length=255, help_text="Obrigatório. Informe um e-mail válido.")
 
     document = forms.CharField(widget=forms.TextInput(attrs={
-        'placeholder': '(CPF/RG/PASSPORT)',
-    }), max_length=15, help_text="Enter a valid CPF, RG, or Passport.")
+        'placeholder': '(CPF/RG/PASSAPORTE)',
+    }), max_length=15, help_text="Informe um CPF, RG ou Passaporte válido.")
 
     address = forms.CharField(widget=forms.TextInput(attrs={
-        'placeholder': '1337 Example St, FL, US',
-    }), max_length=255, help_text="Enter your address.")
+        'placeholder': 'Rua Exemplo 1337, FL, US',
+    }), max_length=255, help_text="Informe seu endereço.")
 
     terms = forms.BooleanField(
         required=True, 
-        error_messages={'required': 'You must accept the terms and conditions'}, 
+        error_messages={'required': 'Você deve aceitar os termos e condições'}, 
         widget=forms.CheckboxInput(attrs={'class': 'terms-checkbox'})
     )
 
@@ -46,7 +46,7 @@ class RegistrationForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control'
         self.fields['terms'].widget.attrs['class'] += ' terms-checkbox'
-        self.fields['password'].help_text = '- It has to be a strong password.'
+        self.fields['password'].help_text = '- Deve ser uma senha forte.'
 
     def clean(self):
         cleaned_data = super(RegistrationForm, self).clean()
@@ -58,34 +58,34 @@ class RegistrationForm(forms.ModelForm):
             # Check if the password contains at least one digit
             if not any(char.isdigit() for char in password):
                 raise forms.ValidationError(
-                    'Password must contain at least one digit.'
+                    'A senha deve conter pelo menos um dígito.'
                 )
             # Check if the password contains at least one lowercase letter
             if not any(char.islower() for char in password):
                 raise forms.ValidationError(
-                    'Password must contain at least one lowercase letter.'
+                    'A senha deve conter pelo menos uma letra minúscula.'
                 )
             # Check if the password contains at least one uppercase letter
             if not any(char.isupper() for char in password):
                 raise forms.ValidationError(
-                    'Password must contain at least one uppercase letter.'
+                    'A senha deve conter pelo menos uma letra maiúscula.'
                 )
             # Check if the password contains at least one symbol
-            if not re.search(r'[!@#$%^&*()\-_=+{};:,<.>]', password):
+            if not re.search(r'[!@#$%^&*()\-\_=+{};:,<.>]', password):
                 raise forms.ValidationError(
-                    'Password must contain at least one symbol.'
+                    'A senha deve conter pelo menos um símbolo.'
                 )
             
             if password != confirm_password:
                 raise forms.ValidationError(
-                    'Password does not match.'
+                    'As senhas não coincidem.'
                 )
         
         
         terms = cleaned_data.get('terms')
         if not terms:
             raise forms.ValidationError(
-                'You must accept the terms and conditions to register.'
+                'Você deve aceitar os termos e condições para se registrar.'
             )
         
         return cleaned_data
@@ -105,7 +105,7 @@ class UserForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     profile_picture = forms.ImageField(required=False, error_messages={
-                                       'invalid': ("Image files only")},
+                                       'invalid': ("Apenas arquivos de imagem")},
                                         widget=forms.FileInput)
 
     class Meta:

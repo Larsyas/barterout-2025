@@ -150,7 +150,7 @@ def login(request):
                 pass
 
             auth.login(request, user)
-            messages.success(request, 'You are now logged in.')
+            messages.success(request, 'Você entrou com sucesso.')
             url = request.META.get('HTTP_REFERER')
             try:
                 query = requests.utils.urlparse(url).query  # type: ignore
@@ -164,7 +164,7 @@ def login(request):
                 return redirect('dashboard')
 
         else:
-            messages.error(request, 'Invalid login credentials. Try again.')
+            messages.error(request, 'Credenciais de login inválidas. Tente novamente.')
             return redirect('login')
 
     return render(request, 'accounts/login.html')
@@ -178,7 +178,7 @@ def terms_of_use(request):
 def logout(request):
 
     auth.logout(request)
-    messages.success(request, 'You are logged out.')
+    messages.success(request, 'Você saiu da conta.')
     return redirect('login')
 
 
@@ -194,11 +194,11 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         messages.success(
-            request, 'Congratulations! Your account is activated.')
+            request, 'Parabéns! Sua conta foi ativada.')
         return redirect('login')
 
     else:
-        messages.error(request, 'Invalid activation link.')
+        messages.error(request, 'Link de ativação inválido.')
         return redirect('register')
 
 
@@ -251,12 +251,12 @@ def forgotPassword(request):
             send_email.send()
 
             messages.success(
-                request, 'Password reset email has been sent to your email. Please verify it.')
+                request, 'Enviamos um e-mail para redefinir sua senha. Verifique sua caixa de entrada.')
             return redirect('login')
 
         else:
             messages.error(
-                request, 'Account does not exist, please try again.')
+                request, 'A conta não existe. Tente novamente.')
             return redirect('forgotPassword')
 
     return render(request, 'accounts/forgotPassword.html')
@@ -272,11 +272,11 @@ def resetpassword_validate(request, uidb64, token):
 
     if user is not None and default_token_generator.check_token(user, token):
         request.session['uid'] = uid
-        messages.success(request, 'Please reset your password.')
+        messages.success(request, 'Redefina sua senha.')
         return redirect('resetPassword')
 
     else:
-        messages.error(request, 'This link has been expired.')
+        messages.error(request, 'Este link expirou.')
         return redirect('login')
 
 
@@ -290,11 +290,11 @@ def resetPassword(request):
             user = Account.objects.get(pk=uid)
             user.set_password(password)
             user.save()
-            messages.success(request, 'Password reset successful!')
+            messages.success(request, 'Senha redefinida com sucesso!')
             return redirect('login')
 
         else:
-            messages.error(request, 'Password does not match.')
+            messages.error(request, 'As senhas não coincidem.')
             return redirect('resetPassword')
 
     else:
@@ -325,7 +325,7 @@ def edit_profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Your profile has been updated.')
+            messages.success(request, 'Seu perfil foi atualizado.')
             return redirect('edit_profile')
     else:
         user_form = UserForm(instance=request.user)
@@ -349,7 +349,7 @@ def change_password(request):
 
         if current_password == new_password:
             messages.error(
-                request, 'Could not change password because your new password is your current password.')
+                request, 'Não foi possível alterar: a nova senha é igual à senha atual.')
 
         elif new_password == confirm_password:
             success = user.check_password(current_password)
@@ -357,14 +357,14 @@ def change_password(request):
                 user.set_password(new_password)
                 user.save()
                 # auth.logout(request)
-                messages.success(request, 'Password updated successfully.')
+                messages.success(request, 'Senha atualizada com sucesso.')
                 return redirect('change_password')
 
             else:
-                messages.error(request, 'Wrong current password.')
+                messages.error(request, 'Senha atual incorreta.')
 
         else:
-            messages.error(request, 'Password does not match.')
+            messages.error(request, 'As senhas não coincidem.')
             return redirect('change_password')
 
     return render(request, 'accounts/change_password.html')
