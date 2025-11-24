@@ -3,18 +3,30 @@
 {% block content %}
 
 
-
-
 <!-- ========================= SECTION MAIN ========================= -->
 <section class="section-intro">
-<div class="container">
+  <div class="container">
+    <div class="intro-banner-wrap">
 
-<div class="intro-banner-wrap">
-	<img src="{% static 'images/banners/cover.jpg' %}" class="img-fluid rounded">
-</div>
+      <div class="hero-video-wrapper">
+        <div class="hero-video-frame">
+          <div class="hero-video-inner">
+            <video
+              class="hero-video"
+              src="{% static 'videos/barterout-intro.mp4' %}"
+              controls
+              poster="{% static 'images/banners/cover.jpg' %}"
+            >
+              Seu navegador não suporta vídeo.
+            </video>
+          </div>
+        </div>
+      </div>
 
-</div> <!-- container //  -->
+    </div>
+  </div>
 </section>
+
 <!-- ========================= SECTION MAIN END// ========================= -->
 
 <!-- ========================= SECTION ========================= -->
