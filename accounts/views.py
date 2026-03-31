@@ -63,7 +63,7 @@ def register(request):
             # USER ACTIVATION:
             current_site = get_current_site(request)
             try:
-                mail_subject = 'Please activate your account.'
+                mail_subject = 'Por favor, ative sua conta.'
                 message = render_to_string('accounts/account_verification_email.html', {
                     'user': user,
                     'domain': current_site,
@@ -239,7 +239,7 @@ def forgotPassword(request):
 
             # Reset password email
             current_site = get_current_site(request)
-            mail_subject = 'Reset Your Password.'
+            mail_subject = 'Resete sua senha.'
             message = render_to_string('accounts/reset_password_email.html', {
                 'user': user,
                 'domain': current_site,

@@ -111,7 +111,7 @@ def register_product(request):
             product.save()
             for file in files:
                 ProductImage.objects.create(user_product=product, image=file)
-            return render(request, 'product_registered.html')  # Substitua pelo nome da sua URL de sucesso
+            return render(request, 'product_registered.html')
     else:
         product_form = UserProductForm()
     

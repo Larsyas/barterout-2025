@@ -1,6 +1,6 @@
 {% autoescape off %}
 
-Hi {{user.first_name}},
+Olá {{user.first_name}},
 
 Por favor, clique no link abaixo para confirmar seu cadastro na Barter Out!
 http://www.barterout.com.br{% url "activate" uidb64=uid token=token %}

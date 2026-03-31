@@ -119,8 +119,8 @@ def auto_approve_or_reject_user_product(sender, instance, created, **kwargs):
         # Product approved, send approval email
         confirm_url = f'{settings.SITE_URL}{reverse("confirm_exchange", args=[instance.id])}'
         send_mail(
-            'Product Approval Confirmation',
-            f'Your product {instance.product_name} has been approved for an exchange of {instance.tcm_payment} TCM. Please log in to your account to accept or reject this offer: {confirm_url}',
+            'Confirmação de Aprovação de Produto',
+            f'Seu produto {instance.product_name} foi aprovado para uma troca de {instance.tcm_payment} TCM. Por favor, faça login em sua conta para aceitar ou rejeitar esta oferta: {confirm_url}',
             settings.DEFAULT_FROM_EMAIL,
             [instance.created_by.email],
             fail_silently=False,
@@ -128,8 +128,8 @@ def auto_approve_or_reject_user_product(sender, instance, created, **kwargs):
     elif instance.rejected and instance.user_confirmation is None and not created:
         # Product rejected, send rejection email only if this is the initial rejection
         send_mail(
-            'Product Rejection Confirmation',
-            f'Your product {instance.product_name} has been rejected by our staff team. We are sorry to say we could not accept your product conditions.',
+            'Confirmação de Rejeição de Produto',
+            f'Seu produto {instance.product_name} foi rejeitado pela nossa equipe. Lamentamos em informar que não pudemos aceitar as condições do seu produto.',
             settings.DEFAULT_FROM_EMAIL,
             [instance.created_by.email],
             fail_silently=False,

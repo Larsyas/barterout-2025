@@ -17,13 +17,13 @@ class MyAccountManager(BaseUserManager):
     ):
 
         if not email:
-            raise ValueError('User must have an email address.')
+            raise ValueError('Usuário deve ter um email.')
         if not username:
-            raise ValueError('User must have a username.')
+            raise ValueError('Usuário deve ter um nome de usuário.')
         if not document:
-            raise ValueError('User must provide the document.')
+            raise ValueError('Usuário deve fornecer um documento.')
         if not address:
-            raise ValueError('User must provide the address.')
+            raise ValueError('Usuário deve fornecer um endereço.')
 
         user = self.model(
             email=self.normalize_email(email),
